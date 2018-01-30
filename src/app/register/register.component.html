@@ -1,8 +1,11 @@
 <div class="register-wrapper">
 
   <h1>register here</h1>
-    <input type="text" name="username" placeholder="username">
-    <input type="password" name="password" placeholder="password">
-  
-    <button>Register</button>
-  </div>
+  <h2>fields with star (*) are required</h2>
+  <input type="text" name="username" placeholder="username*" required [(ngModel)]="media.username">
+  <input type="password" name="password" placeholder="password*" required [(ngModel)]="media.password">
+  <input type="email" name="email" placeholder="email*" required [(ngModel)]="media.email">
+  <input type="text" name="fullName" placeholder="full name" [(ngModel)]="media.fullName">
+  <br>
+  <button (click)="media.register()">Register</button>
+</div>

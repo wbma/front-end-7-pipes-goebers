@@ -1,23 +1,62 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class MediaService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   apiUrl = 'http://media.mw.metropolia.fi/wbma';
   loginUrl = '/login';
+  registerUrl = '/users';
 
 
   username: string;
   password: string;
+  fullName: string;
+  email: string;
 
   accessToken: string;
 
-  public register() {
-
+  private formValidation(): boolean {
+    if (!this.username) {
+      alert('Please check that all required fields have content');
+      return false;
+    } else if (!this.password) {
+      alert('Please check that all required fields have content');
+      return false;
+    } else if (!this.email) {
+      alert('Please check that all required fields have content');
+      return false;
+    } else {
+      return true;
+    }
   }
+
+  public register() {
+    if (this.formValidation()) {
+      console.log('username: ' + this.username);
+      console.log('pass: ' + this.password);
+      console.log('full name: ' + this.fullName);
+      console.log('email: ' + this.email);
+
+      const body = {
+        username: this.username,
+        password: this.password,
+        email: this.email,
+        fullName: this.fullName
+      };
+
+      this.http.post(this.apiUrl + this.registerUrl, body).subscribe( data => {
+        console.log(data);
+        
+        this.login();
+      });
+  }
+
+
+  };
 
   public login() {
     console.log('username: ' + this.username);
@@ -36,7 +75,9 @@ export class MediaService {
 
       console.log('local storage: ' + localStorage.token);
 
-    })
+      this.router.navigate(['front']);
+
+    }); 
   }
 
 }
