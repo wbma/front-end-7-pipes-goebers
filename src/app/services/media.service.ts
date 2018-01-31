@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { error } from 'util';
 
 @Injectable()
 export class MediaService {
@@ -10,7 +11,6 @@ export class MediaService {
   apiUrl = 'http://media.mw.metropolia.fi/wbma';
   loginUrl = '/login';
   registerUrl = '/users';
-
 
   username: string;
   password: string;
@@ -32,7 +32,7 @@ export class MediaService {
     } else {
       return true;
     }
-  }
+  };
 
   public register() {
     if (this.formValidation()) {
@@ -45,7 +45,7 @@ export class MediaService {
         username: this.username,
         password: this.password,
         email: this.email,
-        fullName: this.fullName
+        full_name: this.fullName
       };
 
       this.http.post(this.apiUrl + this.registerUrl, body).subscribe( data => {
@@ -53,9 +53,7 @@ export class MediaService {
         
         this.login();
       });
-  }
-
-
+    }
   };
 
   public login() {
@@ -76,8 +74,8 @@ export class MediaService {
       console.log('local storage: ' + localStorage.token);
 
       this.router.navigate(['front']);
-
-    }); 
-  }
-
+    }, (errorMsg: HttpErrorResponse) => {
+      console.log(errorMsg);
+    })
+  };
 }
