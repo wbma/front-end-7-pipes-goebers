@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { error } from 'util';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class MediaService {
@@ -11,6 +12,7 @@ export class MediaService {
   apiUrl = 'http://media.mw.metropolia.fi/wbma';
   loginUrl = '/login';
   registerUrl = '/users';
+  mediaUrl = '/media';
 
   username: string;
   password: string;
@@ -78,4 +80,25 @@ export class MediaService {
       console.log(errorMsg);
     })
   };
+
+  uploadFile(file: FormData) {
+    console.log(file);
+
+    const body = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token')
+      })
+    };
+
+    this.http.post(this.apiUrl + this.mediaUrl, file, body).subscribe( data => {
+      console.log(data);
+    }, (errorMsg: HttpErrorResponse) => {
+      console.log(errorMsg);
+    })
+  }
+
+  getMedia() {
+    return this.http.get(this.apiUrl + this.mediaUrl + '?limit=999')
+  }
+
 }

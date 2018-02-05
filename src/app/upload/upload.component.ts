@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { MediaService } from '../services/media.service';
 
 @Component({
   selector: 'app-upload',
@@ -7,23 +9,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UploadComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private media: MediaService) { }
 
   ngOnInit() {
+    if(localStorage.getItem('token') === null) {
+      this.router.navigate(['login']);
+    }
   }
 
   file: File;
   title: string;
   description: string;
+  formData: FormData = new FormData();
 
-  upload() {
-    console.log(this.file);
-    console.log(this.title);
-    console.log(this.description);
+  setFile() {
+    if(!this.file || !this.title) { // if file or title are empty dont do nothing
+      alert('Please fill all neccessary fields!');
+    } else {
+      this.formData.append("file", this.file); // file
+      this.formData.append("title", this.title); // title
+      this.formData.append("description", this.description); // desc.
+
+      this.media.uploadFile(this.formData);
+    }
   }
 
-  kys(paska) {
-    console.log(paska);
+  // fileInfo for debugging
+  fileInfo(event) {
+    console.log(event);
+    console.log('filename: ' + event.target.files[0].name);
+    console.log('file type: ' + event.target.files[0].type);
+    console.log('file size: ' + event.target.files[0].size);
+    this.file = event.target.files[0];
   }
 
 }

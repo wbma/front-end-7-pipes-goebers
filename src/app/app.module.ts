@@ -14,6 +14,7 @@ import { LogoutComponent } from './logout/logout.component';
 
 import { MediaService } from './services/media.service';
 import { UploadComponent } from './upload/upload.component';
+import { GalleryComponent } from './gallery/gallery.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { UploadComponent } from './upload/upload.component';
     RegisterComponent,
     LoginComponent,
     LogoutComponent,
-    UploadComponent
+    UploadComponent,
+    GalleryComponent
   ],
   imports: [
     BrowserModule,

@@ -1,11 +1,11 @@
 <h1>Upload file, description is optional</h1>
 
 <br>
-<input type="file" name="file" onchange="kys($event)">
+<input type="file" name="file" (change)="fileInfo($event)">
 <br>
 <input type="text" name="title" placeholder="title" [(ngModel)]="title">
 <br>
 <input type="text" name="description" placeholder="description" [(ngModel)]="description">
 
 <br><br>
-<input type="button" value="Submit" (click)="upload()">
+<input type="button" value="Submit" (click)="setFile()">
