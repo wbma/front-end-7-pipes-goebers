@@ -1,3 +1,4 @@
+import { UploadComponent } from './upload/upload.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LogoutComponent } from './logout/logout.component';
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'front',
     component: FrontComponent
+  },
+  {
+    path: 'upload',
+    component: UploadComponent
   }
 ];
 

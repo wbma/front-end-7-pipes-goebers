@@ -13,7 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 
 import { MediaService } from './services/media.service';
-
+import { UploadComponent } from './upload/upload.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,8 @@ import { MediaService } from './services/media.service';
     TopBarComponent,
     RegisterComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    UploadComponent
   ],
   imports: [
     BrowserModule,
