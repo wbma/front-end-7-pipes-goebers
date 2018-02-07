@@ -15,6 +15,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { MediaService } from './services/media.service';
 import { UploadComponent } from './upload/upload.component';
 import { GalleryComponent } from './gallery/gallery.component';
+import { ThumbnailPipe } from './pipes/thumbnail.pipe';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { GalleryComponent } from './gallery/gallery.component';
     LoginComponent,
     LogoutComponent,
     UploadComponent,
-    GalleryComponent
+    GalleryComponent,
+    ThumbnailPipe
   ],
   imports: [
     BrowserModule,

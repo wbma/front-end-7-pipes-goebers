@@ -92,6 +92,7 @@ export class MediaService {
 
     this.http.post(this.apiUrl + this.mediaUrl, file, body).subscribe( data => {
       console.log(data);
+      alert('thanks for uploading!');
     }, (errorMsg: HttpErrorResponse) => {
       console.log(errorMsg);
     })
@@ -99,6 +100,10 @@ export class MediaService {
 
   getMedia() {
     return this.http.get(this.apiUrl + this.mediaUrl + '?limit=999')
+  }
+
+  getNewFiles() {
+    return this.http.get(this.apiUrl + this.mediaUrl + '?limit=10')
   }
 
 }
